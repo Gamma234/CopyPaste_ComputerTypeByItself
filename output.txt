@@ -1,0 +1,67 @@
+#include <iostream>
+#include <stdlib.h>
+#include <fstream>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <ctime>
+#include <math.h>
+#include <iomanip>
+
+using namespace std ;
+
+int main() {
+	
+	fstream file( "input02.txt", ios::in ) ;
+	
+	int action = 0 ;
+	string command = "" ;
+	
+	int top = 1, north = 2, west = 3, temp = 0 ;
+	
+	while ( file >> action ) {
+		
+		if ( action == 0 ) break ;
+		
+		top = 1, north = 2, west = 3 ;
+		
+		for ( int t = 0 ; t < action ; t++ ) {
+			
+			file >> command ;
+			
+			if ( command == "north" ) {
+				temp = north ;
+				north = top ;
+				top = 7 - temp ;				
+			} // if
+			else if ( command == "south" ) {
+				temp = 7 - top ;
+				top = north ;
+				north = temp ;	
+			} // else if 
+			else if ( command == "east" ) {
+				temp = 7 - top ;
+				top = west ;
+				west = temp ;	
+			} // else if 
+			else if ( command == "west" ) {
+				temp = west ;
+				west = top ;
+				top = 7 - temp ;	
+			} // else if 	
+			
+		} // for 
+		
+		cout << top << endl ;
+		
+	} // while 
+
+	file.close() ;
+
+} // main()
+
+
+
+
+
+
